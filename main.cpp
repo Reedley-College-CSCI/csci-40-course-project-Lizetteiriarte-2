@@ -10,6 +10,16 @@
 
 #include <iostream>
 
+using namespace std;
+
+struct Student {
+    string name;
+    int id;
+    string major;
+    string contact;
+};
+
 int main() {
+
     return 0;
 }
