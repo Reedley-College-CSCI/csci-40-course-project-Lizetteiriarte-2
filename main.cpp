@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <algorithm>
 #include <fstream>
 
 using namespace std;
@@ -71,7 +72,6 @@ void displayStudents(const vector<Student>& students) {
         cout << "Contact: " << s.contact << endl;
     }
 }
-
 void searchByID(const vector<Student>& students) {
     int id;
     cout << "Enter student ID to search: ";
@@ -108,7 +108,32 @@ void searchByName(const vector<Student>& students) {
     }
     cout << "Student not found. \n";
 }
+void saveStudents(const vector<Student>& students) {
+    ofstream outFile("students.txt");
+    for (const Student& s : students) {
+        outFile << s.id << endl;
+        outFile << s.name << endl;
+        outFile << s.major << endl;
+        outFile << s.contact << endl;
+    }
+}
 
+
+void sortByID(vector<Student>& students) {
+    sort(students.begin(), students.end(), [](Student a, Student b) {
+        return a.id < b.id;
+        });
+    saveStudents(students);
+    cout << "Students sorted by ID.\n";
+}
+
+void sortByName(vector<Student>& students) {
+    sort(students.begin(), students.end(), [](Student a, Student b) {
+        return a.name < b.name;
+        });
+    saveStudents(students);
+    cout << "Students sorted by Name.\n";
+}
 
 int main() {
     vector<Student> students;
@@ -139,13 +164,13 @@ int main() {
         case 4:
             searchByName(students);
             break;
-            /*
+
         case 5:
             sortByID(students);
             break;
         case 6:
             sortByName(students);
-            break; */
+            break;
         case 7:
             displayStudents(students);
             break;
