@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -71,6 +72,44 @@ void displayStudents(const vector<Student>& students) {
     }
 }
 
+void searchByID(const vector<Student>& students) {
+    int id;
+    cout << "Enter student ID to search: ";
+    cin >> id;
+
+    for (const Student& s : students) {
+        if (s.id == id) {
+            cout << "\n Student found:\n";
+            cout << "Name: " << s.name << endl;
+            cout << "ID: " << s.id << endl;
+            cout << "Major: " << s.major << endl;
+            cout << "Contact: " << s.contact << endl;
+            return;
+        }
+    }
+    cout << "Student not found. \n";
+}
+
+void searchByName(const vector<Student>& students) {
+    string name;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Enter student name to search: ";
+    getline(cin, name);
+
+    for (const Student& s : students) {
+        if (s.name == name) {
+            cout << "\n Student found:\n";
+            cout << "Name: " << s.name << endl;
+            cout << "ID: " << s.id << endl;
+            cout << "Major: " << s.major << endl;
+            cout << "Contact: " << s.contact << endl;
+            return;
+        }
+    }
+    cout << "Student not found. \n";
+}
+
+
 int main() {
     vector<Student> students;
     int choice;
@@ -94,13 +133,13 @@ int main() {
         case 2:
             removeStudent(students);
             break;
-            /*
         case 3:
             searchByID(students);
             break;
         case 4:
             searchByName(students);
             break;
+            /*
         case 5:
             sortByID(students);
             break;
