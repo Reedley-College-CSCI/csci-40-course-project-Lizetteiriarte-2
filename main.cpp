@@ -1,12 +1,10 @@
-// CSCI-40 Final Project
-//Lizette Iriarte
+//CSCI - 40 Final Project
+// Author: Lizette Iriarte
 
-/* 
- Description: This code will be a system that stores information of different students. 
- It will allow the user to add students using their name, ID, major, and contact info.
- The user will also be able to add and remove students. 
- Users will be able to search up the students using their name or ID. 
- As well as sorting the students by ID/name.* 
+/*
+ Description: This code will be a system that stores information of different students. It will allow the user to add students using their name, ID, major, and contact info.
+ The user will also be able to add and remove students. Users will be able to search up the students using their name or ID.
+ As well as sorting the students by ID/name.*
  *
 */
 
@@ -40,7 +38,38 @@ void addStudent(vector<Student>& students) {
     cout << "Student added successfully." << endl;
 }
 
+void removeStudent(vector<Student>& students) {
+    int id;
+    cout << "Enter student ID to remove: ";
+    cin >> id;
+    bool found = false;
+    for (int i = 0; i < students.size(); i++) {
+        if (students[i].id == id) {
+            students.erase(students.begin() + i);
+            found = true;
+            cout << "Student removed successfully." << endl;
+            break;
+        }
+    }
+    if (!found) {
+        cout << "Student not found." << endl;
+    }
+}
 
+void displayStudents(const vector<Student>& students) {
+    if (students.empty()) {
+        cout << "No students in directory.";
+        return;
+    }
+    cout << "\nStudent Directory:\n";
+    for (const Student& s : students) {
+        cout << "----------------------\n";
+        cout << "Name: " << s.name << endl;
+        cout << "ID: " << s.id << endl;
+        cout << "Major: " << s.major << endl;
+        cout << "Contact: " << s.contact << endl;
+    }
+}
 
 int main() {
     vector<Student> students;
@@ -62,28 +91,29 @@ int main() {
         case 1:
             addStudent(students);
             break;
-            /* case 2:
-                 removeStudent(students);
-                 break;
-             case 3:
-                 searchByID(students);
-                 break;
-             case 4:
-                 searchByName(students);
-                 break;
-             case 5:
-                 sortByID(students);
-                 break;
-             case 6:
-                 sortByName(students);
-                 break;
-             case 7:
-                 displayStudents(students);
-                 break;
-             case 8:
-                 cout << "Exiting program." << endl;
-                 break;
-                 */
+        case 2:
+            removeStudent(students);
+            break;
+            /*
+        case 3:
+            searchByID(students);
+            break;
+        case 4:
+            searchByName(students);
+            break;
+        case 5:
+            sortByID(students);
+            break;
+        case 6:
+            sortByName(students);
+            break; */
+        case 7:
+            displayStudents(students);
+            break;
+        case 8:
+            cout << "Exiting program." << endl;
+            break;
+
         default:
             cout << "Invalid choice. Try again." << endl;
         }
